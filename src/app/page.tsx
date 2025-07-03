@@ -52,6 +52,7 @@ const VisionCard = ({ title, description, icon, bgColor }: { title: string; desc
 );
 
 const Home = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [isClient, setIsClient] = useState(false);
@@ -173,8 +174,20 @@ const Home = () => {
                 </div>
               ))}
             </div>
+            <div className="md:hidden">
+              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white focus:outline-none">
+                {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+              </button>
+            </div>
           </div>
         </div>
+        {isMenuOpen && (
+          <div className="md:hidden bg-primary pb-4">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href} onClick={() => setIsMenuOpen(false)} className="block text-white hover:bg-blue-800 px-6 py-2 rounded-md text-base font-medium transition-colors">{link.label}</a>
+            ))}
+          </div>
+        )}
       </header>
 
       {/* Hero Section */}
@@ -451,7 +464,7 @@ const Home = () => {
                 title="Cultural Integration Events"
                 description="Hosted unique Indo-Canadian Stampede Breakfast and organized youth mentorship & senior support services for community integration."
                 icon={<FaUsers />}
-                color="border-red-500"
+                color="border-orange-500"
               />
               <AchievementCard
                 title="Business & Employment Support"
