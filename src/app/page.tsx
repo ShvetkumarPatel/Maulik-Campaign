@@ -275,7 +275,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Lead Capture Section */}
+      {/* Lead Capture Section
       <section className="py-16 bg-primary text-white">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-4">Sign Up For Updates</h2>
@@ -287,7 +287,7 @@ const Home = () => {
             </div>
           </form>
         </div>
-      </section>
+      </section> */}
 
       {/* Stats Section */}
       <section className="py-16 bg-gradient-to-r from-red-50 via-red-50 to-red-100">
