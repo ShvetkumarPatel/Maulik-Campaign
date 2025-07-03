@@ -7,12 +7,15 @@ import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import useEmblaCarousel from 'embla-carousel-react';
+import SocialMediaSection from './SocialMediaSection';
 
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
   <a href={href} className="text-white hover:text-secondary px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">
     {children}
   </a>
 );
+
+
 
 const StatCard = ({ number, label, icon }: { number: string; label: string; icon: React.ReactNode }) => (
   <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
@@ -49,7 +52,6 @@ const VisionCard = ({ title, description, icon, bgColor }: { title: string; desc
 );
 
 const Home = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [isClient, setIsClient] = useState(false);
@@ -117,44 +119,29 @@ const Home = () => {
     }
   }, [emblaApi])
 
-  useEffect(() => {
-    if (emblaApi) {
-      console.log('Embla carousel initialized')
-    } else {
-      setUseFallbackCarousel(true)
-    }
-  }, [emblaApi])
-
   const navLinks = [
-    { href: '#about', label: 'About Me' },
-    { href: '#qualifications', label: 'Qualifications' },
-    { href: '#achievements', label: 'Achievements' },
-    { href: '#vision', label: 'My Vision' },
+    {
+      label: 'About Me',
+      href: '#about',
+      dropdown: [
+        { href: '#issues', label: 'Issues' },
+        { href: '#volunteer', label: 'Volunteer' },
+        { href: '#events', label: 'Events' },
+      ],
+    },
+    { href: '#qualifications', label: 'Qualification' },
+    { href: '#achievements', label: 'Achievement' },
+    { href: '#vision', label: 'Vision' },
     { href: '#community', label: 'Community' },
     { href: '#contact', label: 'Contact' },
   ];
 
   const heroImages = [
-    { src: '/img/gallery-1.jpeg', alt: 'Community gallery image 1' },
-    { src: '/img/gallery-2.jpeg', alt: 'Community gallery image 2' },
-    { src: '/img/gallery-3.jpeg', alt: 'Community gallery image 3' },
-    { src: '/img/gallery-4.jpeg', alt: 'Community gallery image 4' },
-    { src: '/img/gallery-5.jpeg', alt: 'Community gallery image 5' },
-    { src: '/img/gallery-6.jpeg', alt: 'Community gallery image 6' },
-    { src: '/img/gallery-7.jpeg', alt: 'Community gallery image 7' },
-    { src: '/img/gallery-8.jpeg', alt: 'Community gallery image 8' },
-    { src: '/img/gallery-9.jpeg', alt: 'Community gallery image 9' },
-    { src: '/img/gallery-10.jpeg', alt: 'Community gallery image 10' },
-    { src: '/img/gallery-11.jpeg', alt: 'Community gallery image 11' },
-    { src: '/img/gallery-12.jpeg', alt: 'Community gallery image 12' },
-    { src: '/img/gallery-13.jpeg', alt: 'Community gallery image 13' },
-    { src: '/img/gallery-14.jpeg', alt: 'Community gallery image 14' },
-    { src: '/img/gallery-15.jpeg', alt: 'Community gallery image 15' },
-    { src: '/img/gallery-16.jpeg', alt: 'Community gallery image 16' },
-    { src: '/img/gallery-17.jpeg', alt: 'Community gallery image 17' },
-    { src: '/img/gallery-18.jpeg', alt: 'Community gallery image 18' },
-    { src: '/img/gallery-19.jpeg', alt: 'Community gallery image 19' },
-    { src: '/img/gallery-20.jpeg', alt: 'Community gallery image 20' },
+    { src: '/img/gallery-2.jpeg', alt: 'Community gallery image 1' },
+    { src: '/img/gallery-6.jpeg', alt: 'Community gallery image 2' },
+    { src: '/img/gallery-5.jpeg', alt: 'Community gallery image 3' },
+    { src: '/img/gallery-11.jpeg', alt: 'Community gallery image 4' },
+    { src: '/img/gallery-7.jpeg', alt: 'Community gallery image 5' },
   ];
 
   const galleryImages = Array.from({ length: 20 }, (_, i) => ({
@@ -174,23 +161,20 @@ const Home = () => {
             </a>
             <div className="hidden md:flex items-center space-x-1">
               {navLinks.map((link) => (
-                <NavLink key={link.href} href={link.href}>{link.label}</NavLink>
+                <div key={link.href} className="relative group">
+                  <NavLink href={link.href}>{link.label}</NavLink>
+                  {link.dropdown && (
+                    <div className="absolute top-full left-0 bg-white shadow-lg rounded-md mt-2 py-2 w-48 opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-300 ease-in-out">
+                      {link.dropdown.map((item) => (
+                        <a key={item.href} href={item.href} className="block px-4 py-2 text-gray-800 hover:bg-gray-100">{item.label}</a>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
-            </div>
-            <div className="md:hidden">
-              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white focus:outline-none">
-                {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-              </button>
             </div>
           </div>
         </div>
-        {isMenuOpen && (
-          <div className="md:hidden bg-primary pb-4">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href} onClick={() => setIsMenuOpen(false)} className="block text-white hover:bg-blue-800 px-6 py-2 rounded-md text-base font-medium transition-colors">{link.label}</a>
-            ))}
-          </div>
-        )}
       </header>
 
       {/* Hero Section */}
@@ -234,22 +218,6 @@ const Home = () => {
           </div>
         )}
 
-        {/* Overlay and Text */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/50 via-black/30 to-black/70"></div>
-        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white px-4">
-          <div className="bg-black/40 backdrop-blur-md rounded-2xl p-6 max-w-4xl">
-            <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-white">
-              A Better Future for <span className="text-secondary">Airdrie</span>
-            </h1>
-            <p className="text-xl md:text-2xl font-light max-w-3xl mx-auto mb-6">
-              Professional Engineer • Community Leader • Family Man
-            </p>
-            <p className="text-lg md:text-xl font-light max-w-3xl mx-auto">
-              Dedicated to smart growth, community well-being, and transparent government for all residents.
-            </p>
-          </div>
-        </div>
-
         {/* Controls */}
         <button
           className="embla__prev absolute top-1/2 left-4 z-30 -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-3 rounded-full transition-all duration-300"
@@ -274,34 +242,60 @@ const Home = () => {
             {currentSlide + 1} / {heroImages.length}
           </div>
           <div className="flex space-x-1">
-            {heroImages.slice(0, 10).map((_, index) => (
+            {heroImages.map((_, index) => (
               <button
                 key={index}
                 onClick={() => {
                   if (emblaApi) {
-                    emblaApi.scrollTo(index * 2)
+                    emblaApi.scrollTo(index)
                   } else {
-                    setCurrentSlide(index * 2)
+                    setCurrentSlide(index)
                   }
                 }}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${Math.floor(currentSlide / 2) === index
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${currentSlide === index
                   ? 'bg-white scale-125'
                   : 'bg-white bg-opacity-50 hover:bg-opacity-75'
                   }`}
-                aria-label={`Go to slide group ${index + 1}`}
+                aria-label={`Go to slide ${index + 1}`}
               />
             ))}
           </div>
         </div>
       </section>
 
+      {/* As Featured In Section */}
+      <section className="py-12 bg-gray-100">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-2xl font-semibold text-gray-700 mb-4">As Featured In</h2>
+          <div className="flex justify-center items-center space-x-8">
+            <p className="text-lg text-gray-600">Airdrie Life Magazine</p>
+            <p className="text-lg text-gray-600">Airdrie Echo</p>
+            <p className="text-lg text-gray-600">CTV News</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Lead Capture Section */}
+      <section className="py-16 bg-primary text-white">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-3xl font-bold mb-4">Sign Up For Updates</h2>
+          <p className="text-lg mb-8">Join the movement and get notified of events and updates.</p>
+          <form className="max-w-md mx-auto">
+            <div className="flex items-center">
+              <input type="email" className="w-full px-4 py-2 rounded-l-md text-gray-800" placeholder="Enter your email" />
+              <button type="submit" className="bg-secondary hover:bg-red-700 text-white px-6 py-2 rounded-r-md">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-r from-amber-50 via-orange-50 to-yellow-50">
+      <section className="py-16 bg-gradient-to-r from-red-50 via-red-50 to-red-100">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <StatCard number="20+" label="Years Experience" icon={<FaChartLine />} />
             <StatCard number="1000+" label="Families Helped" icon={<FaHandHoldingHeart />} />
-            <StatCard number="4" label="Children" icon={<FaHeart />} />
+            <StatCard number="1000+" label="Meals Distributed" icon={<FaHeart />} />
             <StatCard number="2015" label="Airdrie Resident" icon={<FaHome />} />
           </div>
         </div>
@@ -315,15 +309,12 @@ const Home = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="relative">
                 <Image
-                  src="/img/maulik-shah.png"
+                  src="/img/maulik-shah.jpeg"
                   alt="Maulik Shah"
                   width={500}
                   height={500}
                   className="rounded-2xl shadow-2xl mx-auto"
                 />
-                <div className="absolute -bottom-4 -right-4 bg-secondary text-white p-4 rounded-full">
-                  <FaUsers size={24} />
-                </div>
               </div>
               <div>
                 <h2 className="text-4xl font-bold mb-6 text-primary">My Story: Airdrie Is My Home</h2>
@@ -334,7 +325,7 @@ const Home = () => {
                   Recognizing the need for community support and connection, I co-founded the <strong>Indian Society of Airdrie (ISA)</strong>. This organization helps newcomers with employment, social integration, and business networking while fostering a sense of belonging and cultural continuity for all residents.
                 </p>
                 <div className="bg-gradient-to-r from-primary to-blue-800 text-white p-6 rounded-xl shadow-lg">
-                  <h3 className="text-xl font-bold mb-2 text-secondary">Why I'm Running</h3>
+                  <h3 className="text-xl font-bold mb-2 text-secondary">Why I'm Running for Councilor</h3>
                   <p className="text-white/90">
                     I believe in putting Airdrie first. With my engineering background and community leadership experience, I'm ready to bring practical solutions and transparent governance to City Hall.
                   </p>
@@ -460,7 +451,7 @@ const Home = () => {
                 title="Cultural Integration Events"
                 description="Hosted unique Indo-Canadian Stampede Breakfast and organized youth mentorship & senior support services for community integration."
                 icon={<FaUsers />}
-                color="border-orange-500"
+                color="border-red-500"
               />
               <AchievementCard
                 title="Business & Employment Support"
@@ -496,19 +487,19 @@ const Home = () => {
               />
               <VisionCard
                 title="Improved Healthcare Access"
-                description="Transportation to major hospitals from Airdrie and eliminate unnecessary Calgary trips for different labs."
+                description="Transportation to major hospitals from Airdrie and eliminate unnecessary trips to Calgary for different lab services."
                 icon={<FaHospital />}
                 bgColor="bg-gradient-to-br from-rose-600 to-rose-700"
               />
               <VisionCard
                 title="Better Transportation"
-                description="Improve transportation inside Airdrie with buses running efficiently, not with sparse passengers."
+                description="Improve transportation within Airdrie with transit running more efficiently, operating at a fuller capacity to maximize savings."
                 icon={<FaBus />}
                 bgColor="bg-gradient-to-br from-violet-600 to-violet-700"
               />
               <VisionCard
                 title="Property Tax Relief"
-                description="Property tax freeze considering population increase and better financial management."
+                description="Initiative to freeze property taxes and foster better financial management."
                 icon={<FaShieldAlt />}
                 bgColor="bg-gradient-to-br from-amber-600 to-amber-700"
               />
@@ -561,6 +552,8 @@ const Home = () => {
         index={lightboxIndex}
       />
 
+      <SocialMediaSection />
+
       {/* Contact Section */}
       <footer id="contact" className="bg-gradient-to-r from-primary via-blue-800 to-primary text-white py-16">
         <div className="container mx-auto px-6">
@@ -573,15 +566,15 @@ const Home = () => {
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <FaEnvelope className="text-secondary" />
-                  <a href="mailto:connect@vote4maulik.ca" className="hover:text-secondary transition-colors">connect@vote4maulik.ca</a>
+                  <a href="mailto:Connect@Vote4Maulik.ca" className="hover:text-secondary transition-colors">Connect@Vote4Maulik.ca</a>
                 </div>
                 <div className="flex items-center space-x-3">
                   <FaPhone className="text-secondary" />
-                  <span>Available for community meetings and discussions</span>
+                  <a href="tel:+1-403-860-5465" className="hover:text-secondary transition-colors">+1 (403) 860-5465</a>
                 </div>
                 <div className="flex items-center space-x-3">
                   <FaMapMarkerAlt className="text-secondary" />
-                  <span>Airdrie, Alberta - Your Community, My Home</span>
+                  <span>Airdrie, Alberta - Our Community, Our Home, Our Future</span>
                 </div>
               </div>
             </div>
