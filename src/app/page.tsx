@@ -124,11 +124,11 @@ const Home = () => {
     {
       label: 'About Me',
       href: '#about',
-      dropdown: [
+     /* dropdown: [
         { href: '#issues', label: 'Issues' },
         { href: '#volunteer', label: 'Volunteer' },
         { href: '#events', label: 'Events' },
-      ],
+      ], */
     },
     { href: '#qualifications', label: 'Qualification' },
     { href: '#achievements', label: 'Achievement' },
