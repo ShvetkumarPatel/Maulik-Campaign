@@ -10,11 +10,11 @@ const SocialMediaSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-white rounded-xl p-6 shadow-lg">
             <h3 className="text-2xl font-bold text-center mb-4">Facebook</h3>
-            <FacebookEmbed url="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F61577681537831&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="100%" />
+            <FacebookEmbed url="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/share/1HxZTqt9pu/?mibextid=wwXIfr&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="100%" />
           </div>
           <div className="bg-white rounded-xl p-6 shadow-lg">
             <h3 className="text-2xl font-bold text-center mb-4">Instagram</h3>
-            <InstagramEmbed url="https://www.instagram.com/p/vote4maulik/" width="100%" />
+            <InstagramEmbed url="https://www.instagram.com/vote4maulik/" width="100%" />
           </div>
           {/* <div className="bg-white rounded-xl p-6 shadow-lg">
             <h3 className="text-2xl font-bold text-center mb-4">X</h3>
