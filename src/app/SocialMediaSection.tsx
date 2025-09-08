@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 const SocialMediaSection = () => {
  return (
 <section className="py-16 bg-gray-100">
@@ -8,32 +9,40 @@ const SocialMediaSection = () => {
 </h2>
 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
          {/* Facebook */}
-<div className="bg-white rounded-xl p-6 shadow-lg text-center">
-<h3 className="text-2xl font-bold text-center mb-4">Facebook</h3>
-<iframe
-             src="https://www.facebook.com/plugins/post.php?href=https://www.facebook.com/story.php?story_fbid=122127949958922717&id=61577681537831&show_text=true&width=500"
-             width="500"
-             height="600"
-             style={{ border: "none", overflow: "hidden", margin: "0 auto" }}
-             scrolling="no"
-             frameBorder="0"
-             allowFullScreen={true}
-             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-></iframe>
+<div className="bg-white rounded-xl p-6 shadow-lg flex flex-col items-center">
+<Image
+             src="/fbimage.jpg"
+             alt="Facebook"
+             width={400}
+             height={200}
+             className="rounded-lg mb-4"
+           />
+<a
+             href="https://www.facebook.com/people/Vote4Maulik/61577681537831/"
+             target="_blank"
+             rel="noopener noreferrer"
+             className="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition"
+>
+             Visit Facebook
+</a>
 </div>
          {/* Instagram */}
-<div className="bg-white rounded-xl p-6 shadow-lg text-center">
-<h3 className="text-2xl font-bold text-center mb-4">Instagram</h3>
-<iframe
-             src="https://www.instagram.com/p/DNlsMeuyPv2/embed"
-             width="400"
-             height="480"
-             frameBorder="0"
-             scrolling="no"
-             allowTransparency={true}
-             allow="encrypted-media"
-             style={{ margin: "0 auto" }}
-></iframe>
+<div className="bg-white rounded-xl p-6 shadow-lg flex flex-col items-center">
+<Image
+             src="/igimage.jpg"
+             alt="Instagram"
+             width={400}
+             height={200}
+             className="rounded-lg mb-4"
+           />
+<a
+             href="https://www.instagram.com/vote4maulik/"
+             target="_blank"
+             rel="noopener noreferrer"
+             className="inline-block px-6 py-3 bg-pink-500 text-white font-semibold rounded-lg shadow-md hover:bg-pink-600 transition"
+>
+             Visit Instagram
+</a>
 </div>
 </div>
 </div>
