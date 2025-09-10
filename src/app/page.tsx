@@ -7,7 +7,7 @@ import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import useEmblaCarousel from 'embla-carousel-react';
-import SocialMediaSection from './SocialMediaSection';
+
 
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
   <a href={href} className="text-white hover:text-secondary px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300">
@@ -565,7 +565,60 @@ const Home = () => {
         index={lightboxIndex}
       />
 
-      <SocialMediaSection />
+     {/* Social Media Section */}
+<section className="py-16 bg-gray-100">
+<div className="container mx-auto px-6">
+<h2 className="text-3xl font-bold text-center mb-12">
+     Follow Me on Social Media
+</h2>
+<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+     {/* Facebook */}
+<div className="bg-white rounded-xl p-6 shadow-lg flex flex-col items-center transition-transform transform hover:scale-105 hover:shadow-2xl">
+<div className="w-full max-w-md overflow-hidden rounded-lg mb-4">
+<Image
+           src="/facebook-box.png"
+           alt="Facebook"
+           width={800}
+           height={400}
+           className="rounded-lg w-full h-auto transition-transform duration-300 ease-in-out hover:scale-110"
+         />
+</div>
+<a
+         href="https://www.facebook.com/people/Vote4Maulik/61577681537831/"
+         target="_blank"
+         rel="noopener noreferrer"
+         className="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md w-full text-center md:w-auto
+           transition-all duration-300 ease-in-out
+           hover:bg-blue-700 hover:scale-105 hover:shadow-lg"
+>
+         Visit Facebook
+</a>
+</div>
+     {/* Instagram */}
+<div className="bg-white rounded-xl p-6 shadow-lg flex flex-col items-center transition-transform transform hover:scale-105 hover:shadow-2xl">
+<div className="w-full max-w-md overflow-hidden rounded-lg mb-4">
+<Image
+           src="/instagram-box.png"
+           alt="Instagram"
+           width={800}
+           height={400}
+           className="rounded-lg w-full h-auto transition-transform duration-300 ease-in-out hover:scale-110"
+         />
+</div>
+<a
+         href="https://www.instagram.com/vote4maulik/"
+         target="_blank"
+         rel="noopener noreferrer"
+         className="inline-block px-6 py-3 bg-pink-500 text-white font-semibold rounded-lg shadow-md w-full text-center md:w-auto
+           transition-all duration-300 ease-in-out
+           hover:bg-pink-600 hover:scale-105 hover:shadow-lg"
+>
+         Visit Instagram
+</a>
+</div>
+</div>
+</div>
+</section>
 
       {/* Contact Section */}
       <footer id="contact" className="bg-gradient-to-r from-primary via-blue-800 to-primary text-white py-16">
