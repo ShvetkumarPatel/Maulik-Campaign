@@ -52,7 +52,6 @@ const VisionCard = ({ title, description, icon, bgColor }: { title: string; desc
 );
 
 const Home = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [isClient, setIsClient] = useState(false);
@@ -124,11 +123,11 @@ const Home = () => {
     {
       label: 'About Me',
       href: '#about',
-     /* dropdown: [
+      dropdown: [
         { href: '#issues', label: 'Issues' },
         { href: '#volunteer', label: 'Volunteer' },
         { href: '#events', label: 'Events' },
-      ], */
+      ],
     },
     { href: '#qualifications', label: 'Qualification' },
     { href: '#achievements', label: 'Achievement' },
@@ -174,20 +173,8 @@ const Home = () => {
                 </div>
               ))}
             </div>
-            <div className="md:hidden">
-              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white focus:outline-none">
-                {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-              </button>
-            </div>
           </div>
         </div>
-        {isMenuOpen && (
-          <div className="md:hidden bg-primary pb-4">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href} onClick={() => setIsMenuOpen(false)} className="block text-white hover:bg-blue-800 px-6 py-2 rounded-md text-base font-medium transition-colors">{link.label}</a>
-            ))}
-          </div>
-        )}
       </header>
 
       {/* Hero Section */}
@@ -288,7 +275,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Lead Capture Section
+      {/* Lead Capture Section */}
       <section className="py-16 bg-primary text-white">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-4">Sign Up For Updates</h2>
@@ -300,7 +287,7 @@ const Home = () => {
             </div>
           </form>
         </div>
-      </section> */}
+      </section>
 
       {/* Stats Section */}
       <section className="py-16 bg-gradient-to-r from-red-50 via-red-50 to-red-100">
@@ -464,7 +451,7 @@ const Home = () => {
                 title="Cultural Integration Events"
                 description="Hosted unique Indo-Canadian Stampede Breakfast and organized youth mentorship & senior support services for community integration."
                 icon={<FaUsers />}
-                color="border-orange-500"
+                color="border-red-500"
               />
               <AchievementCard
                 title="Business & Employment Support"
