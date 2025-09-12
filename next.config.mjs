@@ -5,7 +5,5 @@ const nextConfig = {
  images: {
    unoptimized: true, // GitHub Pages doesn’t support Image Optimization
  },
- assetPrefix: isProd ? '/Maulik-Campaign/' : '', // 👈 replace with your repo name
- basePath: isProd ? '/Maulik-Campaign' : '', // 👈 replace with your repo name
 }
 export default nextConfig
